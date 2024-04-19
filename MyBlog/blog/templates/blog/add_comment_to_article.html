@@ -1,0 +1,25 @@
+<!-- En el archivo add_comment_to_article.html de tu aplicación 'blog' -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agregar Comentario</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Inicio</a></li>
+            <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <h2>Agregar Comentario</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Agregar Comentario</button>
+    </form>
+</body>
+</html>

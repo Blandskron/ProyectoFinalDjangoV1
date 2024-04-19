@@ -1,0 +1,25 @@
+<!-- En el archivo login.html de tu aplicación 'blog' -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Iniciar sesión</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Inicio</a></li>
+            <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <h1>Iniciar sesión</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Iniciar sesión</button>
+    </form>
+</body>
+</html>

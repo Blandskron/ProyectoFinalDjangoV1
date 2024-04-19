@@ -1,0 +1,33 @@
+<!-- En el archivo home.html de tu aplicación 'blog' -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inicio</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Inicio</a></li>
+            <li><a href="{% url 'login' %}?next={{ request.path }}">Iniciar sesión</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <h1>Últimos Artículos</h1>
+    <ul>
+    {% for article in articles %}
+        <li><a href="{% url 'article_detail' article.id %}">{{ article.title }}</a></li>
+    {% empty %}
+        <li>No hay artículos disponibles.</li>
+    {% endfor %}
+    </ul>
+    
+    {% if user.is_authenticated %}
+    <p><a href="{% url 'logout' %}">Cerrar sesión</a></p>
+    {% else %}
+    <p><a href="{% url 'login' %}">Iniciar sesión</a></p>
+    {% endif %}
+</body>
+</html>
